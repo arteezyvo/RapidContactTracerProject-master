@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -43,6 +42,7 @@
             cursor: pointer;
         }
     </style>
+
 </head>
 <body>
     <div style="border:1px solid gray; width:130px;">
@@ -52,45 +52,56 @@
                 <td><div class="board"></div></td>
             </tr>
             <tr>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td class="walk"></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+            </tr>
+            <tr>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div> </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td class="walk">  </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+            </tr>
+            <tr>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div> </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td class="walk">  </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+            </tr>
+            <tr>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div> </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td class="walk">  </td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+                <td><div id="leftbox"ondrop="drophere(event)"ondragover="allowdrophere(event)" class="seat"></div></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td colspan="4"></td>
+                <td><div class="board"></div></td>
+            </tr>
+            <tr>
                 @foreach (var item in Model)
                 {
-                    <td><div class="seat">@Html.DisplayFor(modelItem => item.FirstName)</div></td>
+                    <td><div id="rightbox"draggable="true"ondragstart="startdrag(event)" class="seat">@Html.DisplayFor(modelItem => item.FirstName)</div></td>
+
                 }
-                <!--<td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>-->
-                <td class="walk"></td>
-                <!--<td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>-->
             </tr>
-            <!--<tr>
-                <td><div class="seat"></div> </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td class="walk">  </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-            </tr>
-            <tr>
-                <td><div class="seat"></div> </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td class="walk">  </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-            </tr>
-            <tr>
-                <td><div class="seat"></div> </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td class="walk">  </td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-                <td><div class="seat"></div></td>
-            </tr>-->
         </table>
+
     </div>
     <script>
 
@@ -106,6 +117,41 @@
             }, false);
         }
 
+        function startdrag(e) {
+            e.dataTransfer.setData("Text", e.target.id);
+        }
+
+        function allowdrophere(e) {
+            e.preventDefault();
+        }
+
+        function drophere(e) {
+            e.preventDefault();
+            var data = e.dataTransfer.getData("Text");
+            e.target.appendChild(document.getElementById(data));
+        }
+
+        function dofirst() {
+            image = document.getElementById('rightbox');
+            image.addEventListener("dragstart", startdrag, false);
+            box = document.getElementById('leftbox');
+            leftbox.addEventListener("dragover", allowdrophere, false);
+            leftbox.addEventListener("drop", drophere, false);
+        }
+
+        function startdrag(e) {
+            e.dataTransfer.setData("Text", e.target.id);
+        }
+
+        function allowdrophere(e) {
+            e.preventDefault();
+        }
+
+        function drophere(e) {
+            e.preventDefault();
+            var data = e.dataTransfer.getData("Text");
+            e.target.appendChild(document.getElementById(data));
+        } 
     </script>
 </body>
 </html>
@@ -148,3 +194,5 @@
         </tr>
     }
 </table>
+
+
